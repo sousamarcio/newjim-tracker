@@ -4,7 +4,7 @@
       <BarraLateral />
     </div>
     <div class="column is-three-quarter">
-      <FormularioPrincipal />
+      <FormularioTracker />
     </div>
   </main>
 </template>
@@ -12,13 +12,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import BarraLateral from "./components/BarraLateral.vue";
-import FormularioPrincipal from "./components/Formulario.vue";
+import FormularioTracker from "./components/Formulario.vue";
 
 export default defineComponent({
   name: "App",
   components: {
     BarraLateral,
-    FormularioPrincipal
+    FormularioTracker,
   },
 });
 </script>
