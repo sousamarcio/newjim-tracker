@@ -1,14 +1,20 @@
 <template>
   <div class="is-flex is-align-items-center is-justify-content-space-between">
     <CronometroTracker :tempoEmSegundos="tempoEmSegundos" />
-    <BotaoTracker :texto="textoBtn1" :icone="play"
-    :disabled="cronometroRodando" 
-    :cronometroRodando="cronometroRodando" 
-    @click="iniciar" />
-    <BotaoTracker :texto="textoBtn2" :icone="stop"
-     :cronometroRodando="cronometroRodando"
-     :disabled="!cronometroRodando"
-     @click="finalizar" />
+    <BotaoTracker
+      :texto="textoBtn1"
+      :icone="play"
+      :disabled="cronometroRodando"
+      :cronometroRodando="cronometroRodando"
+      @click="iniciar"
+    />
+    <BotaoTracker
+      :texto="textoBtn2"
+      :icone="stop"
+      :cronometroRodando="cronometroRodando"
+      :disabled="!cronometroRodando"
+      @click="finalizar"
+    />
   </div>
 </template>
 
@@ -22,17 +28,17 @@ export default defineComponent({
   emits: ["aoTemporizadorFinalizado"],
   components: {
     CronometroTracker,
-    BotaoTracker
+    BotaoTracker,
   },
   data() {
     return {
       tempoEmSegundos: 0,
       cronometro: 0,
       cronometroRodando: false,
-      textoBtn1: 'play',
-      textoBtn2: 'stop',
-      play: 'fas fa-play',
-      stop: 'fas fa-stop'
+      textoBtn1: "play",
+      textoBtn2: "stop",
+      play: "fas fa-play",
+      stop: "fas fa-stop",
     };
   },
   methods: {
@@ -47,7 +53,7 @@ export default defineComponent({
       clearInterval(this.cronometro);
       this.$emit("aoTemporizadorFinalizado", this.tempoEmSegundos);
       this.tempoEmSegundos = 0;
-    }
-  }
+    },
+  },
 });
 </script>

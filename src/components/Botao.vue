@@ -3,7 +3,7 @@
     <span class="icon">
       <i :class="icone"></i>
     </span>
-    <span>{{texto}}</span>
+    <span>{{ texto }}</span>
   </button>
 </template>
 
@@ -19,12 +19,12 @@ export default defineComponent({
     },
     icone: {
       type: String,
-      default: ""
+      default: "",
     },
     cronometroRodando: {
-        type: Boolean,
-        default: false
-    }
-  }
+      type: Boolean,
+      default: false,
+    },
+  },
 });
 </script>
