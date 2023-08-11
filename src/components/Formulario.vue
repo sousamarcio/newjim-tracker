@@ -39,8 +39,8 @@ import { computed, defineComponent } from "vue";
 import TemporizadorTracker from "./Temporizador.vue";
 import { useStore } from "vuex";
 import { key } from "@/store";
-import { NOTIFICAR } from "@/store/tipo-mutacoes";
 import { TipoNotificacao } from "@/interfaces/INotificacao";
+import useNotificador from '@/hooks/notificador';
 
 export default defineComponent({
   name: "FormularioTracker",
@@ -58,11 +58,11 @@ export default defineComponent({
     finalizarTarefa(tempoDecorrido: number): void {
       const projeto = this.projetos.find((proj) => proj.id == this.idProjeto);
       if (!projeto) {
-        this.store.commit(NOTIFICAR, {
-          titulo: "Ops!",
-          texto: "Selecione um projeto antes de finalizar a tarefa!",
-          tipo: TipoNotificacao.FALHA,
-        });
+        this.notificar(
+        TipoNotificacao.FALHA,
+        "Ops!",
+        "Selecione um projeto antes de finalizar a tarefa!",
+      );
         return;
       }
 
@@ -76,9 +76,11 @@ export default defineComponent({
   },
   setup() {
     const store = useStore(key);
+    const { notificar } = useNotificador();
     return {
       projetos: computed(() => store.state.projetos),
       store,
+      notificar
     };
   },
 });
