@@ -21,12 +21,8 @@
 import { defineComponent } from "vue";
 import { TipoNotificacao } from "@/interfaces/INotificacao";
 import { useStore } from "@/store";
-import {
-  ADICIONA_PROJETO,
-  ALTERA_PROJETO,
-} from "@/store/tipo-mutacoes";
-
-import useNotificador from '@/hooks/notificador';
+import useNotificador from "@/hooks/notificador";
+import { ALTERAR_PROJETO, CADASTRAR_PROJETO } from "@/store/tipo-acoes";
 
 export default defineComponent({
   name: "FormularioTracker",
@@ -51,13 +47,19 @@ export default defineComponent({
   methods: {
     salvar() {
       if (this.id) {
-        this.store.commit(ALTERA_PROJETO, {
-          id: this.id,
-          nome: this.nomeDoProjeto,
-        });
+        this.store
+          .dispatch(ALTERAR_PROJETO, {
+            id: this.id,
+            nome: this.nomeDoProjeto,
+          })
+          .then(() => this.lidarComSucesso());
       } else {
-        this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto);
+        this.store.dispatch(CADASTRAR_PROJETO, this.nomeDoProjeto).then(() => {
+          this.lidarComSucesso();
+        });
       }
+    },
+    lidarComSucesso() {
       this.nomeDoProjeto = "";
       this.notificar(
         TipoNotificacao.SUCESSO,
@@ -72,7 +74,7 @@ export default defineComponent({
     const { notificar } = useNotificador();
     return {
       store,
-      notificar
+      notificar,
     };
   },
 });
