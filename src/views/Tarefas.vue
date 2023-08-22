@@ -27,7 +27,7 @@
         </header>
         <section class="modal-card-body">
           <div class="field">
-            <label for="descricaoDaTarefa" class="label">Descrição</label>
+            <label for="descricaoDaTarefa" class="label">Descrição da tarefa</label>
             <input
               type="text"
               class="input"
