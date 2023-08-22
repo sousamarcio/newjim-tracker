@@ -18,7 +18,7 @@
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">Editando uma terefa</p>
+          <p class="modal-card-title">Editando uma tarefa</p>
           <button
             class="delete"
             aria-label="close"
@@ -27,7 +27,7 @@
         </header>
         <section class="modal-card-body">
           <div class="field">
-            <label for="descricaoDaTarefa" class="label">Descrição da tarefa</label>
+            <label for="descricaoDaTarefa" class="label">Descrição</label>
             <input
               type="text"
               class="input"
