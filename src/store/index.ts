@@ -9,6 +9,7 @@ import {
   ALTERA_PROJETO,
   ATUALIZA_TAREFA,
   DEFINIR_PROJETOS,
+  DEFINIR_TAREFAS,
   EXCLUIR_PROJETO,
   NOTIFICAR,
   REMOVE_TAREFA,
@@ -16,7 +17,9 @@ import {
 import {
   ALTERAR_PROJETO,
   CADASTRAR_PROJETO,
+  CADASTRAR_TAREFA,
   OBTER_PROJETOS,
+  OBTER_TAREFAS,
   REMOVER_PROJETO,
 } from "./tipo-acoes";
 import http from "@/http";
@@ -64,6 +67,12 @@ export const store = createStore<Estado>({
     [REMOVE_TAREFA](state, id: string) {
       state.tarefas = state.tarefas.filter((p) => p.id != id);
     },
+    [DEFINIR_TAREFAS](state, tarefas: ITarefa[]) {
+      state.tarefas = tarefas;
+    },
+    [ADICIONA_TAREFA](state, tarefa: ITarefa) {
+      state.tarefas.push(tarefa);
+    },
     [NOTIFICAR](state, novaNotificacao: INotificacao) {
       novaNotificacao.id = new Date().getTime();
       state.notificacoes.push(novaNotificacao);
@@ -91,6 +100,14 @@ export const store = createStore<Estado>({
       return http
         .delete(`/projetos/${id}`)
         .then(() => commit(EXCLUIR_PROJETO, id));
+    },
+    [OBTER_TAREFAS]({ commit }) {
+      http.get("tarefas").then((res) => commit(DEFINIR_TAREFAS, res.data));
+    },
+    [CADASTRAR_TAREFA]({ commit }, tarefa: ITarefa) {
+      return http
+        .post("/tarefas", tarefa)
+        .then((res) => commit(ADICIONA_TAREFA, res.data));
     },
   },
 });

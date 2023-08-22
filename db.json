@@ -8,5 +8,25 @@
       "nome": "Newjim Tracker 2.0",
       "id": 4
     }
+  ],
+  "tarefas": [
+    {
+      "id": 1,
+      "duracaoEmSegundos": 120,
+      "descrição": "Configuração",
+      "projeto": {
+        "id": 1,
+        "nome": "Tracker"
+      }
+    },
+    {
+      "duracaoEmSegundos": 3,
+      "descricao": "transform",
+      "projeto": {
+        "id": 3,
+        "nome": "curso avançado de vue.js"
+      },
+      "id": 2
+    }
   ]
 }
