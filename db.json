@@ -7,6 +7,10 @@
     {
       "nome": "Newjim Tracker 2.0",
       "id": 4
+    },
+    {
+      "nome": "javascript",
+      "id": 5
     }
   ],
   "tarefas": [
@@ -27,6 +31,15 @@
         "nome": "curso avançado de vue.js"
       },
       "id": 2
+    },
+    {
+      "duracaoEmSegundos": 3,
+      "descricao": "arrays",
+      "projeto": {
+        "nome": "javascript",
+        "id": 5
+      },
+      "id": 3
     }
   ]
 }

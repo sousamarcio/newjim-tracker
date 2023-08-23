@@ -82,7 +82,12 @@ export const store = createStore<Estado>({
   },
   actions: {
     [OBTER_PROJETOS]({ commit }) {
-      http.get("projetos").then((res) => commit(DEFINIR_PROJETOS, res.data));
+      http
+        .get("projetos")
+        .then((res) => commit(DEFINIR_PROJETOS, res.data))
+        .catch((e) => {
+          console.log(e);
+        });
     },
     [CADASTRAR_PROJETO](contexto, nomeDoProjeto: string) {
       return http.post("/projetos", {
@@ -98,7 +103,12 @@ export const store = createStore<Estado>({
         .then(() => commit(EXCLUIR_PROJETO, id));
     },
     [OBTER_TAREFAS]({ commit }) {
-      http.get("tarefas").then((res) => commit(DEFINIR_TAREFAS, res.data));
+      http
+        .get("tarefas")
+        .then((res) => commit(DEFINIR_TAREFAS, res.data))
+        .catch((e) => {
+          console.log(e);
+        });
     },
     [CADASTRAR_TAREFA]({ commit }, tarefa: ITarefa) {
       return http
