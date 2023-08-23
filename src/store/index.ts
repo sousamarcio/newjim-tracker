@@ -86,7 +86,7 @@ export const store = createStore<Estado>({
         .get("projetos")
         .then((res) => commit(DEFINIR_PROJETOS, res.data))
         .catch((e) => {
-          console.log(e);
+          console.log('error', e);
         });
     },
     [CADASTRAR_PROJETO](contexto, nomeDoProjeto: string) {
@@ -107,7 +107,7 @@ export const store = createStore<Estado>({
         .get("tarefas")
         .then((res) => commit(DEFINIR_TAREFAS, res.data))
         .catch((e) => {
-          console.log(e);
+          console.log('error', e);
         });
     },
     [CADASTRAR_TAREFA]({ commit }, tarefa: ITarefa) {
