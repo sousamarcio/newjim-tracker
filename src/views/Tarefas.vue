@@ -37,7 +37,9 @@
           </div>
         </section>
         <footer class="modal-card-foot">
-          <button class="button is-success">Salvar alterações</button>
+          <button class="button is-success" @click="alterarTarefa">
+            Salvar alterações
+          </button>
           <button class="button" @click="fecharModal">Cancelar</button>
         </footer>
       </div>
@@ -55,6 +57,7 @@ import {
   OBTER_PROJETOS,
   OBTER_TAREFAS,
   CADASTRAR_TAREFA,
+  ALTERAR_TAREFA,
 } from "@/store/tipo-acoes";
 import { useStore } from "@/store";
 
@@ -84,6 +87,10 @@ export default defineComponent({
     },
     fecharModal(): void {
       this.tarefaSelecionada = null;
+    },
+    alterarTarefa() {
+      this.store.dispatch(ALTERAR_TAREFA, this.tarefaSelecionada)
+        .then(() => this.fecharModal());
     },
   },
   setup() {

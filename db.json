@@ -2,7 +2,7 @@
   "projetos": [
     {
       "id": 3,
-      "nome": "curso avançado de vue.js"
+      "nome": "Novo curso avançado de vue.js"
     },
     {
       "id": 4,
@@ -25,7 +25,7 @@
     },
     {
       "duracaoEmSegundos": 3,
-      "descricao": "transform",
+      "descricao": "transformer 1",
       "projeto": {
         "id": 3,
         "nome": "curso avançado de vue.js"

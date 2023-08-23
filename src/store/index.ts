@@ -7,7 +7,7 @@ import {
   ADICIONA_PROJETO,
   ADICIONA_TAREFA,
   ALTERA_PROJETO,
-  ATUALIZA_TAREFA,
+  ALTERA_TAREFA,
   DEFINIR_PROJETOS,
   DEFINIR_TAREFAS,
   EXCLUIR_PROJETO,
@@ -16,6 +16,7 @@ import {
 } from "./tipo-mutacoes";
 import {
   ALTERAR_PROJETO,
+  ALTERAR_TAREFA,
   CADASTRAR_PROJETO,
   CADASTRAR_TAREFA,
   OBTER_PROJETOS,
@@ -56,18 +57,18 @@ export const store = createStore<Estado>({
     [DEFINIR_PROJETOS](state, projetos: IProjeto[]) {
       state.projetos = projetos;
     },
-    [ATUALIZA_TAREFA](state, tarefa: ITarefa) {
-      const indice = state.tarefas.findIndex((p) => p.id == tarefa.id);
-      state.tarefas[indice] = tarefa;
-    },
-    [REMOVE_TAREFA](state, id: string) {
-      state.tarefas = state.tarefas.filter((p) => p.id != id);
-    },
     [DEFINIR_TAREFAS](state, tarefas: ITarefa[]) {
       state.tarefas = tarefas;
     },
     [ADICIONA_TAREFA](state, tarefa: ITarefa) {
       state.tarefas.push(tarefa);
+    },
+    [ALTERA_TAREFA](state, tarefa: ITarefa) {
+      const index = state.tarefas.findIndex(t => t.id == tarefa.id);
+      state.tarefas[index] = tarefa;
+    },
+    [REMOVE_TAREFA](state, id: number) {
+      state.tarefas = state.tarefas.filter((p) => p.id != id);
     },
     [NOTIFICAR](state, novaNotificacao: INotificacao) {
       novaNotificacao.id = new Date().getTime();
@@ -86,7 +87,7 @@ export const store = createStore<Estado>({
         .get("projetos")
         .then((res) => commit(DEFINIR_PROJETOS, res.data))
         .catch((e) => {
-          console.log('error', e);
+          console.log("error", e);
         });
     },
     [CADASTRAR_PROJETO](contexto, nomeDoProjeto: string) {
@@ -107,13 +108,18 @@ export const store = createStore<Estado>({
         .get("tarefas")
         .then((res) => commit(DEFINIR_TAREFAS, res.data))
         .catch((e) => {
-          console.log('error', e);
+          console.log("error", e);
         });
     },
     [CADASTRAR_TAREFA]({ commit }, tarefa: ITarefa) {
       return http
         .post("/tarefas", tarefa)
         .then((res) => commit(ADICIONA_TAREFA, res.data));
+    },
+    [ALTERAR_TAREFA]({ commit }, tarefa: ITarefa) {
+      return http
+        .put(`/tarefas/${tarefa.id}`, tarefa)
+        .then(() => commit(ALTERA_TAREFA, tarefa));
     },
   },
 });
