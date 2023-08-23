@@ -56,10 +56,6 @@ export const store = createStore<Estado>({
     [DEFINIR_PROJETOS](state, projetos: IProjeto[]) {
       state.projetos = projetos;
     },
-    [ADICIONA_TAREFA](state, tarefa: ITarefa) {
-      tarefa.id = new Date().toISOString();
-      state.tarefas.push(tarefa);
-    },
     [ATUALIZA_TAREFA](state, tarefa: ITarefa) {
       const indice = state.tarefas.findIndex((p) => p.id == tarefa.id);
       state.tarefas[indice] = tarefa;
