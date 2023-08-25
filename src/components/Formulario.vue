@@ -35,12 +35,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import TemporizadorTracker from "./Temporizador.vue";
 import { useStore } from "vuex";
 import { key } from "@/store";
 import { TipoNotificacao } from "@/interfaces/INotificacao";
-import useNotificador from '@/hooks/notificador';
+import useNotificador from "@/hooks/notificador";
 
 export default defineComponent({
   name: "FormularioTracker",
@@ -48,39 +48,39 @@ export default defineComponent({
   components: {
     TemporizadorTracker,
   },
-  data() {
-    return {
-      descricao: "",
-      idProjeto: "",
-    };
-  },
-  methods: {
-    finalizarTarefa(tempoDecorrido: number): void {
-      const projeto = this.projetos.find((proj) => proj.id == this.idProjeto);
+  setup(props, { emit }) {
+    const store = useStore(key);
+    const descricao = ref("");
+    const idProjeto = ref("");
+    const projetos = computed(() => store.state.projeto.projetos);
+
+    const { notificar } = useNotificador();
+
+    const finalizarTarefa = (tempoDecorrido: number): void => {
+      const projeto = projetos.value.find((proj) => proj.id == idProjeto.value);
       if (!projeto) {
-        this.notificar(
-        TipoNotificacao.FALHA,
-        "Ops!",
-        "Selecione um projeto antes de finalizar a tarefa!",
-      );
+        notificar(
+          TipoNotificacao.FALHA,
+          "Ops!",
+          "Selecione um projeto antes de finalizar a tarefa!"
+        );
         return;
       }
 
-      this.$emit("aoSalvarTarefa", {
+      emit("aoSalvarTarefa", {
         duracaoEmSegundos: tempoDecorrido,
-        descricao: this.descricao,
+        descricao: descricao.value,
         projeto: projeto,
       });
-      this.descricao = "";
-    },
-  },
-  setup() {
-    const store = useStore(key);
-    const { notificar } = useNotificador();
+      descricao.value = "";
+    };
+
     return {
-      projetos: computed(() => store.state.projeto.projetos),
-      store,
-      notificar
+      projetos,
+      descricao,
+      idProjeto,
+      notificar,
+      finalizarTarefa,
     };
   },
 });
