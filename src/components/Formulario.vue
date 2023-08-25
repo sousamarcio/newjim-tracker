@@ -78,7 +78,7 @@ export default defineComponent({
     const store = useStore(key);
     const { notificar } = useNotificador();
     return {
-      projetos: computed(() => store.state.projetos),
+      projetos: computed(() => store.state.projeto.projetos),
       store,
       notificar
     };

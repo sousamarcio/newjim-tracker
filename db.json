@@ -11,6 +11,10 @@
     {
       "nome": "javascript",
       "id": 5
+    },
+    {
+      "nome": "Idiomas",
+      "id": 6
     }
   ],
   "tarefas": [
@@ -25,7 +29,7 @@
     },
     {
       "duracaoEmSegundos": 3,
-      "descricao": "transformer 1",
+      "descricao": "transformer 2",
       "projeto": {
         "id": 3,
         "nome": "curso avançado de vue.js"
