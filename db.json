@@ -9,12 +9,12 @@
       "nome": "Newjim Tracker 3.0"
     },
     {
-      "nome": "javascript",
-      "id": 5
-    },
-    {
       "nome": "Idiomas",
       "id": 6
+    },
+    {
+      "id": 7,
+      "nome": "curso ruby on rails"
     }
   ],
   "tarefas": [

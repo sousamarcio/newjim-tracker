@@ -10,7 +10,6 @@ import {
   DEFINIR_TAREFAS,
   ADICIONA_TAREFA,
   ALTERA_TAREFA,
-  REMOVE_TAREFA,
 } from "@/store/tipo-mutacoes";
 import { Module } from "vuex";
 
