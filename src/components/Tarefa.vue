@@ -5,7 +5,7 @@
         {{ tarefa.descricao || "Tarefa sem descrição" }}
       </div>
       <div class="column is-3">
-        {{ tarefa.projeto?.nome || 'N/D' }}
+        {{ tarefa.projeto?.nome || "N/D" }}
       </div>
       <div class="column">
         <CronometroTracker :tempoEmSegundos="tarefa.duracaoEmSegundos" />
@@ -22,7 +22,7 @@ import BoxTracker from "./Box.vue";
 
 export default defineComponent({
   name: "TarefaTracker",
-  emits: ['aoTarefaClicada'],
+  emits: ["aoTarefaClicada"],
   components: {
     CronometroTracker,
     BoxTracker,
@@ -33,16 +33,19 @@ export default defineComponent({
       required: true,
     },
   },
-  methods: {
-    tarefaClicada () : void {
-      this.$emit('aoTarefaClicada', this.tarefa);
-    }
-  }
+  setup(props, { emit }) {
+    const tarefaClicada = (): void => {
+      emit("aoTarefaClicada", props.tarefa);
+    };
+    return {
+      tarefaClicada,
+    };
+  },
 });
 </script>
 
 <style scoped>
-  .clicavel {
-    cursor: pointer;
-  }
+.clicavel {
+  cursor: pointer;
+}
 </style>

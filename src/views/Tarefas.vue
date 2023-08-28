@@ -1,6 +1,19 @@
 <template>
   <FormularioTracker @aoSalvarTarefa="salvarTarefa" />
   <div class="lista">
+    <div class="field">
+      <p class="control has-icons-left has-icons-right">
+        <input
+          type="text"
+          class="input"
+          placeholder="Digite para filtrar"
+          v-model="filtro"
+        />
+        <span class="icon is-small is-left">
+          <i class="fas fa-search"></i>
+        </span>
+      </p>
+    </div>
     <TarefaTracker
       v-for="(tarefa, index) in tarefas"
       :key="index"
@@ -48,7 +61,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref, watchEffect } from "vue";
 import FormularioTracker from "../components/Formulario.vue";
 import TarefaTracker from "../components/Tarefa.vue";
 import ITarefa from "../interfaces/ITarefa";
@@ -89,7 +102,8 @@ export default defineComponent({
       this.tarefaSelecionada = null;
     },
     alterarTarefa() {
-      this.store.dispatch(ALTERAR_TAREFA, this.tarefaSelecionada)
+      this.store
+        .dispatch(ALTERAR_TAREFA, this.tarefaSelecionada)
         .then(() => this.fecharModal());
     },
   },
@@ -98,9 +112,16 @@ export default defineComponent({
     store.dispatch(OBTER_TAREFAS);
     store.dispatch(OBTER_PROJETOS);
 
+    const filtro = ref("");
+
+    watchEffect(() => {
+      store.dispatch(OBTER_TAREFAS, filtro.value);
+    });
+
     return {
       tarefas: computed(() => store.state.tarefa.tarefas),
       store,
+      filtro,
     };
   },
 });
