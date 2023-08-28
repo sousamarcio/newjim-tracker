@@ -6,7 +6,7 @@
     },
     {
       "id": 4,
-      "nome": "Newjim Tracker 3.0"
+      "nome": "Newjim Tracker 4.0"
     },
     {
       "nome": "Idiomas",
@@ -29,7 +29,7 @@
     },
     {
       "duracaoEmSegundos": 3,
-      "descricao": "transformer 2",
+      "descricao": "transformer 3",
       "projeto": {
         "id": 3,
         "nome": "curso avançado de vue.js"
@@ -62,6 +62,15 @@
         "nome": "Newjim Tracker 3.0"
       },
       "id": 5
+    },
+    {
+      "duracaoEmSegundos": 5,
+      "descricao": "Vuex",
+      "projeto": {
+        "id": 4,
+        "nome": "Newjim Tracker 4.0"
+      },
+      "id": 6
     }
   ]
 }

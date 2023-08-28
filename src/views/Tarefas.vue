@@ -23,40 +23,29 @@
     <BoxTracker v-if="listaEstaVazia">
       Você não está muito produtivo hoje :(
     </BoxTracker>
-    <div
-      v-if="tarefaSelecionada"
-      class="modal"
-      :class="{ 'is-active': tarefaSelecionada }"
-    >
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">Editando uma tarefa</p>
-          <button
-            class="delete"
-            aria-label="close"
-            @click="fecharModal"
-          ></button>
-        </header>
-        <section class="modal-card-body">
-          <div class="field">
-            <label for="descricaoDaTarefa" class="label">Descrição</label>
-            <input
-              type="text"
-              class="input"
-              v-model="tarefaSelecionada.descricao"
-              id="descricaoDaTarefa"
-            />
-          </div>
-        </section>
-        <footer class="modal-card-foot">
-          <button class="button is-success" @click="alterarTarefa">
-            Salvar alterações
-          </button>
-          <button class="button" @click="fecharModal">Cancelar</button>
-        </footer>
-      </div>
-    </div>
+    <ModalTracker :mostrar="tarefaSelecionada != null">
+      <template v-slot:cabecalho>
+        <p class="modal-card-title">Editando uma tarefa</p>
+        <button class="delete" aria-label="close" @click="fecharModal"></button>
+      </template>
+      <template v-slot:corpo>
+        <div class="field">
+          <label for="descricaoDaTarefa" class="label">Descrição</label>
+          <input
+            type="text"
+            class="input"
+            v-model="tarefaSelecionada.descricao"
+            id="descricaoDaTarefa"
+          />
+        </div>
+      </template>
+      <template v-slot:rodape>
+        <button class="button is-success" @click="alterarTarefa">
+          Salvar alterações
+        </button>
+        <button class="button" @click="fecharModal">Cancelar</button>
+      </template>
+    </ModalTracker>
   </div>
 </template>
 
@@ -66,6 +55,7 @@ import FormularioTracker from "../components/Formulario.vue";
 import TarefaTracker from "../components/Tarefa.vue";
 import ITarefa from "../interfaces/ITarefa";
 import BoxTracker from "../components/Box.vue";
+import ModalTracker from "../components/Modal.vue";
 import {
   OBTER_PROJETOS,
   OBTER_TAREFAS,
@@ -80,6 +70,7 @@ export default defineComponent({
     FormularioTracker,
     TarefaTracker,
     BoxTracker,
+    ModalTracker
   },
   data() {
     return {
